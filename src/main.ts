@@ -29,15 +29,21 @@ WA.onInit()
                     const lName = "Room2/layerToToggle";
                     let l = layers.get(lName);
                     if (l) {
-                        console.log("layerToToggle", l.visible); // l.visible is false even the tile is visible
-                        let property = l.properties?.find((p: any) => p.name === "test");
-                        console.log("property test", property); // always undefined
-                        if (!l.visible) {
+                        // Create lName variable and define object with visible property
+                        if(!WA.state.hasVariable(lName)){
+                            WA.state.saveVariable(lName, {visible: l.visible});
+                        }
+
+                        // LoadVariable lName variable
+                        const variableLName = WA.state.loadVariable(lName) as {visible: boolean};
+                        console.log('variableLName', variableLName);
+                        if (!variableLName.visible) {
                             WA.room.showLayer(lName);
-                            WA.room.setProperty(layerName, "test", 1);
+                            WA.state.saveVariable(lName, {visible: 1});
                         } else {
                             // this case will never trigger because l.visible is not up-to-date
                             WA.room.hideLayer(lName);
+                            WA.state.saveVariable(lName, {visible: 0});
                         }
                     }
                 }
