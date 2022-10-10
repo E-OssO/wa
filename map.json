@@ -163,7 +163,7 @@
                         {
                          "name":"openTab",
                          "type":"string",
-                         "value":"https:\/\/teams.microsoft.com\/l\/meetup-join\/19%3a2549218d7e5e4ff09bce7a7e534874ba%40thread.skype\/1665155216631?context=%7b%22Tid%22%3a%22da39cdc3-d12c-44c8-a82a-ace4fae634a9%22%2c%22Oid%22%3a%22c43b1592-4b72-40bd-8667-0327d8c7b604%22%7d"
+                         "value":"https:\/\/teams.microsoft.com\/l\/meetup-join\/19%3a0193e43a49d642378ab0450e5ec55768%40thread.skype\/?context=%7b%22Tid%22%3a%22da39cdc3-d12c-44c8-a82a-ace4fae634a9%22%2c%22Oid%22%3a%22c43b1592-4b72-40bd-8667-0327d8c7b604%22%7d"
                         }],
                  "type":"tilelayer",
                  "visible":false,
@@ -241,9 +241,9 @@
                  "opacity":1,
                  "properties":[
                         {
-                         "name":"openWebsite",
+                         "name":"openTab",
                          "type":"string",
-                         "value":"https:\/\/teams.microsoft.com\/l\/meetup-join\/19%3a2549218d7e5e4ff09bce7a7e534874ba%40thread.skype\/1665395500766?context=%7b%22Tid%22%3a%22da39cdc3-d12c-44c8-a82a-ace4fae634a9%22%2c%22Oid%22%3a%22c43b1592-4b72-40bd-8667-0327d8c7b604%22%7d"
+                         "value":"https:\/\/teams.microsoft.com\/l\/meetup-join\/19%3a2549218d7e5e4ff09bce7a7e534874ba%40thread.skype\/?context=%7b%22Tid%22%3a%22da39cdc3-d12c-44c8-a82a-ace4fae634a9%22%2c%22Oid%22%3a%22c43b1592-4b72-40bd-8667-0327d8c7b604%22%7d"
                         }],
                  "type":"tilelayer",
                  "visible":true,
