@@ -4,75 +4,50 @@ import { getLayersMap } from "@workadventure/scripting-api-extra";
 
 console.log("Script started successfully");
 
+console.log('Problem : \n\
+After a setTiles, the "unset" tile with "null" still here and if you go on the position of a "null" tile you got the event onEnterLayer. \n\
+\n\
+Actions to reproduce : \n\
+ - First go on blue carpet. You got the console.log onEnterLayer for tile "layerToMove" \n\
+ - Go on the red carpet. The blue carpet are moved \n\
+ - Go on the old position of the blue carpet (tile set to null) and you got the console.log onEnterLayer for tile "layerToMove"');
+
 // Waiting for the API to be ready
 WA.onInit()
     .then(async () => {
-        console.log("Scripting API ready");
-        console.log("Player tags: ", WA.player.tags);
-
         let layers = await getLayersMap();
 
         layers.forEach((layer, layerName) => {
             let onEnterLayer = WA.room.onEnterLayer(layerName);
             onEnterLayer.subscribe(async () => {
-                console.log(layerName, layer);
+                console.log("onEnterLayer", layerName, layer);
 
-                /**
-                 * Room 2
-                 * Case : toggle to show/hide and use layer.visible
-                 * 
-                 * Problem :
-                 * After show the layer you can't hide them because l.visible is still false
-                 * And property test doesn't exist
-                 */
-                if (layerName === "Room2/toggle") {
-                    const lName = "Room2/layerToToggle";
+                if (layerName === "move") {
+                    const lName = "layerToMove";
                     let l = layers.get(lName);
+                    console.log(l);
                     if (l) {
-                        console.log("layerToToggle", l.visible); // l.visible is false even the tile is visible
-                        let property = l.properties?.find((p: any) => p.name === "test");
-                        console.log("property test", property); // always undefined
-                        if (!l.visible) {
-                            WA.room.showLayer(lName);
-                            WA.room.setProperty(layerName, "test", 1);
-                        } else {
-                            // this case will never trigger because l.visible is not up-to-date
-                            WA.room.hideLayer(lName);
-                        }
-                    }
-                }
-
-                /**
-                 * Room 3
-                 * Case : Move tile and don't trigger onEnterLayer old position
-                 * 
-                 * Problem :
-                 * After move layer if you go on old position you still get onEnterLayer console.log
-                 */
-                if (layerName === "Room3/move") {
-                    const lName = "Room3/layerToMove";
-                    let l = layers.get(lName);
-                    if (l) {
+                        console.log("setTiles");
                         WA.room.setTiles([
-                            { x: 26, y: 4, tile: "blue", layer: lName },
-                            { x: 27, y: 4, tile: "blue", layer: lName },
-                            { x: 28, y: 4, tile: "blue", layer: lName },
-                            { x: 26, y: 5, tile: "blue", layer: lName },
-                            { x: 27, y: 5, tile: "blue", layer: lName },
-                            { x: 28, y: 5, tile: "blue", layer: lName },
-                            { x: 26, y: 6, tile: "blue", layer: lName },
-                            { x: 27, y: 6, tile: "blue", layer: lName },
-                            { x: 28, y: 6, tile: "blue", layer: lName },
+                            { x: 5, y: 4, tile: "blue", layer: lName },
+                            { x: 6, y: 4, tile: "blue", layer: lName },
+                            { x: 7, y: 4, tile: "blue", layer: lName },
+                            { x: 5, y: 5, tile: "blue", layer: lName },
+                            { x: 6, y: 5, tile: "blue", layer: lName },
+                            { x: 7, y: 5, tile: "blue", layer: lName },
+                            { x: 5, y: 6, tile: "blue", layer: lName },
+                            { x: 6, y: 6, tile: "blue", layer: lName },
+                            { x: 7, y: 6, tile: "blue", layer: lName },
 
-                            { x: 23, y: 4, tile: null, layer: lName },
-                            { x: 24, y: 4, tile: null, layer: lName },
-                            { x: 25, y: 4, tile: null, layer: lName },
-                            { x: 23, y: 5, tile: null, layer: lName },
-                            { x: 24, y: 5, tile: null, layer: lName },
-                            { x: 25, y: 5, tile: null, layer: lName },
-                            { x: 23, y: 6, tile: null, layer: lName },
-                            { x: 24, y: 6, tile: null, layer: lName },
-                            { x: 25, y: 6, tile: null, layer: lName },
+                            { x: 1, y: 4, tile: null, layer: lName },
+                            { x: 2, y: 4, tile: null, layer: lName },
+                            { x: 3, y: 4, tile: null, layer: lName },
+                            { x: 1, y: 5, tile: null, layer: lName },
+                            { x: 2, y: 5, tile: null, layer: lName },
+                            { x: 3, y: 5, tile: null, layer: lName },
+                            { x: 1, y: 6, tile: null, layer: lName },
+                            { x: 2, y: 6, tile: null, layer: lName },
+                            { x: 3, y: 6, tile: null, layer: lName },
                         ]);
                     }
                 }
